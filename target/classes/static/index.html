@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<h1>注册页面</h1>
+<form id="registrationForm">
+    <label for="username">用户名:</label>
+    <input type="text" id="username" name="username" required><br><br>
+    <label for="password">密码:</label>
+    <input type="password" id="password" name="password" required><br><br>
+    <button type="submit">注册</button>
+</form>
+
+<script>
+    // 获取表单元素和注册按钮
+    const registrationForm = document.getElementById('registrationForm');
+    const submitButton = document.querySelector('button[type="submit"]');
+
+    // 监听表单提交事件
+    registrationForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // 阻止表单默认提交行为
+
+        // 获取用户名和密码
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // 构造请求体
+        const requestBody = {
+            username: username,
+            password: password
+        };
+
+        // 发送POST请求到接口
+        axios.post('http://localhost:8080/user/register', requestBody)
+            .then(function (response) {
+                // 注册成功
+                console.log(response.data); // 可以根据需要处理返回的数据
+            });
+    });
+</script>
